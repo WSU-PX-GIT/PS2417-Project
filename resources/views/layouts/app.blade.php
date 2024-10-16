@@ -13,6 +13,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -20,8 +21,8 @@
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <header class="top_bar">
+                    <div class="max-w-7xl ml-auto mr-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
@@ -29,7 +30,29 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                <div id="sideNav" class="side_nav">
+                    <div>
+                        <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <a href="CPD_page.php">CPD</a>
+                        <x-nav-link :href="route('adminassign')" :active="request()->routeIs('adminassign')">
+                            {{ __('Create/Assign Admin') }}
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <a href="non_compliant_page.html">Non-Compliant</a>
+                        <a href="reporting_page.html">Reporting</a>
+                    </div>
+                    <div>
+                        <a href="AdminDashboard_page.html">Admin Dashboard</a>
+                        <a href="CPD_management_page.php">CPD Management</a>
+                        <a href="VersionUpdates_page.html">Version Updates</a>
+                    </div>
+                </div>
+                <div id="mainarea" class="main-area">
+                    {{ $slot }}
+                </div>
             </main>
         </div>
     </body>

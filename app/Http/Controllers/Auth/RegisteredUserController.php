@@ -22,6 +22,9 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
+
+
+
     /**
      * Handle an incoming registration request.
      *
@@ -39,12 +42,51 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'usertype' => $request->usertype
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('home', absolute: false));
+    }
+    public function adminstore(Request $request): RedirectResponse
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->usertype = $request->usertype;
+        $user->save();
+        return back()->with('success', 'Register successfully');
+    }
+
+
+    public function agencystore(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'usertype' => ['required', 'string', 'max:255'],
+            'AgencyName' => ['required', 'string', 'max:255'],
+
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'usertype' => $request->usertype,
+            'AgencyID' => $request->AgencyID,
+            'AgencyName' => $request->AgencyName,
+        ]);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect(route('home', absolute: false));
     }
 }

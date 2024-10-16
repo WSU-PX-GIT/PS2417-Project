@@ -13,6 +13,10 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $this->createAgencyUser();
+        $this->createAgentUser();
+        $this->createAdminUser();
+
+
     }
 
     public function createAgencyUser()
@@ -22,7 +26,33 @@ class UserSeeder extends Seeder
             'name'     => 'Agency User',
             'email'    => 'agency@agency.com',
             'password' => bcrypt('password'),
-            'usertype' => 'agency'
+            'usertype' => 'agency',
+            'AgencyID' => 1,
+            'AgencyName' => 'Barry Real Estate'
+        ]);
+    }
+    public function createAgentUser()
+    {
+        User::create([
+            'id' => 2,
+            'name'     => 'Agent User',
+            'email'    => 'agent@agent.com',
+            'password' => bcrypt('password'),
+            'usertype' => 'agent',
+            'AgencyID' => '',
+            'AgencyName' => ''
+        ]);
+    }
+    public function createAdminUser()
+    {
+        User::create([
+            'id' => 1,
+            'name'     => 'Admin User',
+            'email'    => 'admin@admin.com',
+            'password' => bcrypt('password'),
+            'usertype' => 'admin',
+            'AgencyID' => '',
+            'AgencyName' => ''
         ]);
     }
 }

@@ -1,5 +1,11 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+<x-appagency-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Admin Creation') }}
+        </h2>
+    </x-slot>
+
+    <form method="POST" action="{{ route('registeragency') }}">
         @csrf
 
         <!-- Name -->
@@ -21,9 +27,9 @@
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+                          type="password"
+                          name="password"
+                          required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -33,19 +39,19 @@
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+                          type="password"
+                          name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <!-- User Select -->
+        <!-- Role Select -->
         <div class="mt-4">
-            <x-input-label for="usertype" :value="__('User Select')" />
+            <x-input-label for="usertype" :value="__('Role Select')" />
             <select class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" id="usertype" name="usertype">
-                <option value="">-- Select User Type --</option>
-                <option value="agency">Agency User</option>
-                <option value="agent">Agent User</option>
+                <option value="">-- Select Role for User --</option>
+                <option value="agency">Agency Admin</option>
+                <option value="agent">Agency Agent</option>
             </select>
             {{-- <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" /> --}}
             <x-input-error :messages="$errors->get('usertype')" class="mt-2" />
@@ -61,4 +67,5 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+
+</x-appagency-layout>

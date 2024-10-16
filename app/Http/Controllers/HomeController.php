@@ -12,7 +12,7 @@ class HomeController extends Controller
         if (Auth::id()) {
             $usertype=Auth()->user()->usertype;
 
-            if($usertype=='user'){
+            if($usertype=='agent'){
                 return view('agent.agenthome');
             }
 
