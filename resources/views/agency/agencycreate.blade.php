@@ -4,7 +4,13 @@
             {{ __('Admin Creation') }}
         </h2>
     </x-slot>
-
+    <div class="card-body">
+        @if(Session::has('success'))
+            <div class="alert alert-success" role="alert">
+                {{ Session::get('success') }}
+            </div>
+        @endif
+    </div>
     <form method="POST" action="{{ route('registeragency') }}">
         @csrf
 

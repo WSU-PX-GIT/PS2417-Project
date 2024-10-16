@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
@@ -17,6 +18,11 @@ route::get('/home', [HomeController::class, 'index']) ->middleware('auth') -> na
 Route::get('/search', [SearchController::class, 'search'])->name('user.search');
 Route::get('/adminassign', function () {return view('admin.adminassign');}) -> name('adminassign');
 Route::get('/admincreate', function () {return view('admin.admincreate');}) -> name('admincreate');
+Route::get('/agencyassign', function () {return view('agency.agencyassign');}) -> name('agencyassign');
+Route::get('/agencycreate', function () {return view('agency.agencycreate');}) -> name('agencycreate');
+Route::post('registeradmin', [RegisteredUserController::class, 'adminstore'])->name('registeradmin');
+Route::post('registeragency', [RegisteredUserController::class, 'agencystore'])->name('registeragency');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
