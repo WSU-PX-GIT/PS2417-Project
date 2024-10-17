@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('CPDInformation', function (Blueprint $table) {
-            $table->id('cpd_id')->primary()->autoIncrement();
+            $table->id('cpd_id')->autoIncrement();
             $table->integer('qualification_id');
             $table->string('has_cpd_requirement');
             $table->string('cpd_evidence_retention_period');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
         });
         Schema::create('QualificationsDetails', function (Blueprint $table) {
-            $table->id('qualification_id')->primary()->autoIncrement();
+            $table->id('qualification_id')->autoIncrement();
             $table->string('qualification_name')->nullable(false);
             $table->string('state_or_territory');
             $table->string('state_abbreviation');
@@ -34,15 +34,17 @@ return new class extends Migration
             $table->timestamps();
         });
         Schema::create('QualificationsCategory', function (Blueprint $table) {
-            $table->id('category_id')->primary()->autoIncrement();
+            $table->id('category_id')->autoIncrement();
             $table->integer('qualification_id');
             $table->foreign('qualification_id')->references('qualification_id')->on('QualificationsDetails');
             $table->string('category_name')->nullable(false);
         });
         Schema::create('CPDReport', function (Blueprint $table) {
-            $table->id('cpd_id')->primary()->autoIncrement();
+            $table->id('cpd_id')->autoIncrement();
+            $table->integer('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('cpd_name')->nullable(false);
+            $table->integer('qualification_id');
             $table->foreign('qualification_id')->references('qualification_id')->on('QualificationsDetails');
             $table->string('cpd_type');
             $table->integer('units');
