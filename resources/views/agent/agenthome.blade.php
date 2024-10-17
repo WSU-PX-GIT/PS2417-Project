@@ -10,6 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("Welcome, Agent User!") }}
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                        {{ __('Agent Dashboard') }}
+                    </x-nav-link>
                 </div>
             </div>
         </div>

@@ -35,6 +35,9 @@
                 <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                     {{ __('Agent Dashboard') }}
                 </x-nav-link>
+                <x-nav-link :href="route('agentaddReport')" :active="request()->routeIs('agentaddReport')">
+                    {{ __('Add Report') }}
+                </x-nav-link>
                 <a href="ActionRequired_page.html">Action Required</a>
             </div>
             <div>
