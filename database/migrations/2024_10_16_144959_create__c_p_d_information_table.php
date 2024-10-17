@@ -41,11 +41,11 @@ return new class extends Migration
         });
         Schema::create('CPDReport', function (Blueprint $table) {
             $table->id('cpd_id')->primary()->autoIncrement();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('cpd_name')->nullable(false);
             $table->foreign('qualification_id')->references('qualification_id')->on('QualificationsDetails');
-            $table->string('qualification_name');
-            $table->string('qualification_category');
             $table->string('cpd_type');
+            $table->integer('units');
             $table->boolean('is_cpd_evidence_attached');
             $table->text('cpd_evidence');
             $table->year('CPD_year');
