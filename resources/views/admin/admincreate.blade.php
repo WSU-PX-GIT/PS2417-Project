@@ -40,7 +40,14 @@
                             <input type="password" name="password" class="form-control" id="password" required>
                         </div>
                         <div class="mb-3">
-                            <input type="hidden" id="usertype" name="usertype" value="admin">
+                            <x-input-label for="usertype" :value="__('Role Select')" />
+                            <select class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" id="usertype" name="usertype">
+                                <option value="">-- Select Role for User --</option>
+                                <option value="admin">Agency</option>
+                                <option value="agency">Agency</option>
+                                <option value="agent">Agent</option>
+                            </select>
+                            {{-- <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" /> --}}
                             <x-input-error :messages="$errors->get('usertype')" class="mt-2" />
                         </div>
                         <div class="mb-3">

@@ -10,7 +10,8 @@ class SearchController extends Controller {
         $userdetails = DB::table("users")->where("name",$userName)->first();
         echo "<br/>";
         if ($userdetails) {
-            echo "The name exists in the table";
+            $searcheduser = $userdetails;
+            return view('admin.adminassign2', [$searcheduser]);
         } else {
             echo "No data found";
         }

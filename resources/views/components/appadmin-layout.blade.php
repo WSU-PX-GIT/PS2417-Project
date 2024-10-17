@@ -38,15 +38,22 @@
                 <x-nav-link :href="route('adminassign')" :active="request()->routeIs('adminassign')">
                     {{ __('Create/Assign Admin') }}
                 </x-nav-link>
-                <a href="ActionRequired_page.html">Action Required</a>
+                <x-nav-link :href="route('adminAddCPD')" :active="request()->routeIs('adminAddCPD')">
+                    {{ __('Create New CPD') }}
+                </x-nav-link>
             </div>
+
             <div>
-                <a href="non_compliant_page.html">Non-Compliant</a>
-                <a href="reporting_page.html">Reporting</a>
-            </div>
-            <div>
-                <a href="CPD_management_page.php">CPD Management</a>
-                <a href="VersionUpdates_page.html">Version Updates</a>
+                <x-nav-link :href="route('adminViewCPD')" :active="request()->routeIs('adminViewCPD')">
+                    {{ __('View CPD') }}
+                </x-nav-link>
+                <x-nav-link :href="route('adminEditCPD')" :active="request()->routeIs('adminEditCPD')">
+                    {{ __('Edit CPD') }}
+                </x-nav-link>
+                <x-nav-link :href="route('adminDeleteCPD')" :active="request()->routeIs('adminDeleteCPD')">
+                    {{ __('Delete CPD') }}
+                </x-nav-link>
+
             </div>
         </div>
         <div id="mainarea" class="main-area">
