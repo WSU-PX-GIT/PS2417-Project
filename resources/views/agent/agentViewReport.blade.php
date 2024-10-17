@@ -34,7 +34,7 @@
             </form>
 
             <br>
-            <button type="button" onclick="window.location.href='{{ route('editReport, $report->cpd_id') }}';">Edit</button>
+            <button type="button" onclick="window.location.href='{{ route('editReport', $report->cpd_id) }}';">Edit</button>
 
 {{--            <form method="POST" action="{{ url('agentEditReport') }}">--}}
 {{--                @csrf--}}
