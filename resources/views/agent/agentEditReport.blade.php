@@ -12,7 +12,7 @@
 
     <div class="main-area">
         <h2>Edit CPD Record</h2>
-        <form method="POST" action="{{ route('editReport', $report->cpd_id) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('updateReport', $report->cpd_id) }}" enctype="multipart/form-data">
             @csrf
 
             <p>
@@ -32,7 +32,7 @@
 
             <p>
                 <label for="Qualification_category">Qualification Category: </label>
-                <input type="text" id="Qualification_category" name="Qualification_category" value="{{ $report->qualification_category }}">
+                <input type="text" id="Qualification_category" name="Qualification_category">
             </p>
 
             <p>
