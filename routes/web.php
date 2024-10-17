@@ -26,12 +26,12 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/agentAddReport', [CPDReportController::class, 'getQualifications']) -> name('agentAddReport');
-//Route::get('/agentViewReport', [CPDReportController::class, 'viewOneReport'])->name('agentViewReport');
 Route::get('/agentAllCPD', [CPDReportController::class, 'viewAllReports'])->name('agentAllCPD');
 Route::post('report_added', [CPDReportController::class, 'addReport'])->name('addReport');
-Route::post('/deleteReport/{cpd_id}', [CPDReportController::class, 'deleteReport'])->name('deleteReport');
-Route::get('/editReport/{cpd_id}', [CPDReportController::class, 'editReport'])->name('editReport');
 Route::get('/agentViewReport/{cpd_id}', [CPDReportController::class, 'viewOneReport'])->name('agentViewReport');
+Route::post('/deleteReport/{cpd_id}', [CPDReportController::class, 'deleteReport'])->name('deleteReport');
+Route::get('/agentEditReport/{cpd_id}', [CPDReportController::class, 'editReport'])->name('editReport');
+Route::post('/agentEditReport/{cpd_id}', [CPDReportController::class, 'updateReport'])->name('updateReport');
 
 
 require __DIR__.'/auth.php';
