@@ -1,46 +1,42 @@
 <x-appadmin-layout>
     <body>
     <div class="main-area">
-        <h2>Add CPD</h2>
+        <h2>Edit CPD</h2>
         @if(Session::has('success'))
             <div class="alert alert-success" role="alert">
                 {{ Session::get('success') }}
             </div>
         @endif
-        <form method="POST" action="{{ route('editCPD') }}" >
+        <form method="POST" action="{{ route('editCPDConfirm', $CPD->qualification_id) }}" >
             @csrf
             <p>
                 <label for="qualification_name">Qualification Name: </label>
-                <input type="text" id="qualification_name" name="qualification_name">
+                <input type="text" id="qualification_name" name="qualification_name" value="{{$CPD->qualification_name}}">
             </p>
             <p>
                 <label for="state_or_territory">State or Territory: </label>
-                <input type="text" id="state_or_territory" name="state_or_territory">
+                <input type="text" id="state_or_territory" name="state_or_territory" value="{{$CPD->state_or_territory}}">
             </p>
 
             <p>
                 <label for="state_abbreviation">State Abbreviation: </label>
-                <input type="text" id="state_abbreviation" name="state_abbreviation">
+                <input type="text" id="state_abbreviation" name="state_abbreviation" value="{{$CPD->state_abbreviation}}">
             </p>
 
             <p>
                 <label for="truncated_name">Truncated Name: </label>
-                <input type="text" id="truncated_name" name="truncated_name">
+                <input type="text" id="truncated_name" name="truncated_name" value="{{$CPD->truncated_name}}">
             </p>
 
-            <p>
-                <label for="qualification_classes">Qualification Class: </label>
-                <input type="text" id="qualification_classes" name="qualification_classes">
-            </p>
 
             <p>
                 <label for="CPD_unit">CPD Unit: </label>
-                <input type="text" id="CPD_unit" name="CPD_unit">
+                <input type="text" id="CPD_unit" name="CPD_unit" value="{{$CPD->CPD_unit}}">
             </p>
 
             <p>
                 <label for="expiry_renewal_date">Expiry Renewal Date: </label>
-                <input type="date" id="expiry_renewal_date" name="expiry_renewal_date">
+                <input type="date" id="expiry_renewal_date" name="expiry_renewal_date" value="{{$CPD->expiry_renewal_date}}">
             </p>
 
             <p>

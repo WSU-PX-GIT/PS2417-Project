@@ -27,7 +27,9 @@ Route::get('adminEditConfirm/,{id}', function () {return view('admin.adminEditCo
 Route::get('/adminDeleteCPD', [CPDController::class, 'searchCPD3']) -> name('adminDeleteCPD');
 Route::get('adminDeleteConfirm/,{id}',  [CPDController::class, 'deleteCPD']) -> name('adminDeleteConfirm');
 Route::post('/addCPD', [CPDController::class, 'addCPD']) -> name('addCPD');
-Route::post('/editCPD', [CPDController::class, 'editCPD']) -> name('editCPD');
+Route::get('editCPD/,{id}', [CPDController::class, 'editCPD']) -> name('editCPD');
+Route::post('editCPDConfirm/,{id}', [CPDController::class, 'editCPDConfirm']) -> name('editCPDConfirm');
+
 
 
 Route::get('/agencyassign', function () {return view('agency.agencyassign');}) -> name('agencyassign');

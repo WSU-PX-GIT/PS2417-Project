@@ -24,7 +24,7 @@
             @if (count($reports) > 0)
                 @foreach ($reports as $report)
                     <tr>
-                        <td><button type="button" onclick="window.location.href='{{ route('adminEditConfirm',$report->qualification_id) }}';">Edit Record</button></td>
+                        <td><button type="button" onclick="window.location.href='{{ route('editCPD',$report->qualification_id) }}';">Edit Record</button></td>
                         <td>{{ $report->qualification_name}}</td>
                         <td>{{ $report->state_or_territory}}</td>
                         <td>{{ $report->CPD_unit}}</td>

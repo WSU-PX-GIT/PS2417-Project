@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class CPDController extends Controller
 {
@@ -48,8 +49,28 @@ class CPDController extends Controller
         return back()->with('success', 'CPD Created successfully');
 
     }
-    public function editCPD(Request $request): RedirectResponse
+    public function editCPD($id)
     {
+        $CPD = DB::table('QualificationsDetails')->get()->where('qualification_id', $id)->first();
+
+
+        return view('admin.adminEditConfirm', ['CPD' => $CPD]);
+
+            }
+    public function editCPDConfirm(Request $request,$id): RedirectResponse
+    {
+        $data = [
+            'qualification_name' => $request->input('qualification_name'),
+            'state_or_territory' => $request->input('state_or_territory'),
+            'state_abbreviation' => $request->input('state_abbreviation'),
+            'truncated_name' => $request->input('truncated_name'),
+            'CPD_unit' => $request->input('CPD_unit'),
+            'expiry_renewal_date' => $request->input('expiry_renewal_date'),
+            'last_updated' => now()
+        ];
+
+
+        DB::table('QualificationsDetails')->where('qualification_id', $id)->update($data);
         return back()->with('success', 'Edited successfully');    }
     public function deleteCPD($delete): RedirectResponse
     {
