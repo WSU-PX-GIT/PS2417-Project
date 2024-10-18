@@ -22,9 +22,13 @@ Route::get('/adminassign2', function () {return view('admin.adminassign2');}) ->
 Route::get('/admincreate', function () {return view('admin.admincreate');}) -> name('admincreate');
 Route::get('/adminAddCPD', function () {return view('admin.adminAddCPD');}) -> name('adminAddCPD');
 Route::get('/adminViewCPD', [CPDController::class, 'searchCPD']) -> name('adminViewCPD');
-Route::get('/adminEditCPD', function () {return view('admin.adminEditCPD');}) -> name('adminEditCPD');
-Route::get('/adminDeleteCPD', function () {return view('admin.adminDeleteCPD');}) -> name('adminDeleteCPD');
+Route::get('/adminEditCPD', [CPDController::class, 'searchCPD2']) -> name('adminEditCPD');
+Route::get('adminEditConfirm/,{id}', function () {return view('admin.adminEditConfirm');}) -> name('adminEditConfirm');
+Route::get('/adminDeleteCPD', [CPDController::class, 'searchCPD3']) -> name('adminDeleteCPD');
+Route::get('adminDeleteConfirm/,{id}',  [CPDController::class, 'deleteCPD']) -> name('adminDeleteConfirm');
 Route::post('/addCPD', [CPDController::class, 'addCPD']) -> name('addCPD');
+Route::post('/editCPD', [CPDController::class, 'editCPD']) -> name('editCPD');
+
 
 Route::get('/agencyassign', function () {return view('agency.agencyassign');}) -> name('agencyassign');
 Route::get('/agencycreate', function () {return view('agency.agencycreate');}) -> name('agencycreate');

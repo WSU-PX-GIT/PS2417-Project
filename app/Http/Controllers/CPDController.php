@@ -18,6 +18,22 @@ class CPDController extends Controller
         return view('admin.cpdmanagement', ['reports' => $reports]);
 
     }
+    public function searchCPD2()
+    {
+        $reports = DB::table('QualificationsDetails')->get();
+
+
+        return view('admin.adminEditCPD', ['reports' => $reports]);
+
+    }
+    public function searchCPD3()
+    {
+        $reports = DB::table('QualificationsDetails')->get();
+
+
+        return view('admin.adminDeleteCPD', ['reports' => $reports]);
+
+    }
     public function addCPD(Request $request): RedirectResponse
     {
         $CPD = new CPD();
@@ -29,7 +45,16 @@ class CPDController extends Controller
         $CPD->expiry_renewal_date = $request->expiry_renewal_date;
         $CPD->last_updated = now();
         $CPD->save();
-        return back()->with('success', 'Register successfully');
+        return back()->with('success', 'CPD Created successfully');
 
+    }
+    public function editCPD(Request $request): RedirectResponse
+    {
+        return back()->with('success', 'Edited successfully');    }
+    public function deleteCPD($delete): RedirectResponse
+    {
+
+        DB::table('QualificationsDetails')->where('qualification_id', $delete)->delete();
+        return back()->with('success', 'Deleted successfully');
     }
 }
