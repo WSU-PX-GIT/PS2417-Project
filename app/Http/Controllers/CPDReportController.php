@@ -13,15 +13,14 @@ class CPDReportController extends Controller
     public function addReport(Request $request)
     {
         $incoming_fields = $request->validate([
-            'CPD_name' => 'required',
-            'Qualification' => 'required',
-            'Qualification_category' => 'nullable',
-            'cpd_type' => 'nullable',
+            'CPD_name' => ['required', 'string'],
+            'Qualification' => ['required', 'string'],
+            'Qualification_category' => ['nullable', 'string'],
+            'cpd_type' => 'required',
             'CPD_evidence' => 'nullable',
-            'units' => ['nullable', 'min:0'],
-            'CPD_year' => ['required', 'min:4', 'max:4'],
-            'year_completed' => ['required', 'min:4', 'max:4']
-
+            'units' => ['required', 'min:0', 'integer'],
+            'CPD_year' => ['required', 'digits:4', 'integer'],
+            'year_completed' => ['required', 'digits:4', 'integer', 'gte:CPD_year']
         ]);
 
         $report = new CPDReport();
@@ -39,9 +38,17 @@ class CPDReportController extends Controller
         $report->last_updated = now();
         $report->record_status = false;
 
+        $qualification = DB::table('QualificationsDetails')
+            ->select('QualificationsDetails.retention_period')
+            ->where('qualification_id', $request['Qualification'])
+            ->first();
+
+        $date = now()->addYears($qualification->retention_period)->format('d-m-Y');;
+
+        $report->expiry_date = $date;
+
         $report->save();
 
-//        $cpd_id = $report->cpd_id;
 
         return redirect()->route('agentViewReport', ['cpd_id' => $report->id]);
 
@@ -63,11 +70,6 @@ class CPDReportController extends Controller
 
     public function viewOneReport($cpd_id)
     {
-        // Find the CPD report by its ID
-//            $report =DB::table('CPDReport')
-//                ->select('CPDReport.*')
-//                ->where('CPDReport.cpd_id', $cpd_id)
-//                ->first();
 
         $report = DB::table('CPDReport')
             ->join('QualificationsDetails', 'CPDReport.qualification_id', '=', 'QualificationsDetails.qualification_id')
@@ -75,12 +77,10 @@ class CPDReportController extends Controller
             ->where('CPDReport.cpd_id', $cpd_id)
             ->first();
 
-        // Check if the report exists
         if (!$report) {
             return redirect()->route('home')->with('error', 'Report not found.');
         }
 
-        // Pass the report data to the view
         return view('agent.agentViewReport', ['report' => $report]);
     }
 
@@ -98,31 +98,47 @@ class CPDReportController extends Controller
     }
 
     public function deleteReport($cpd_id) {
-        // Delete the report with the given cpd_id
         DB::table('CPDReport')->where('cpd_id', $cpd_id)->delete();
 
-        // Redirect back to the page showing all CPD records with a success message
         return redirect()->route('agentAllCPD')->with('success', 'CPD record deleted successfully.');
+    }
+    public function editReport($cpd_id) {
+        $qualifications = DB::table('QualificationsDetails')
+            ->select('QualificationsDetails.*')
+            ->get();
+
+        $report = DB::table('CPDReport')
+            ->join('QualificationsDetails', 'CPDReport.qualification_id', '=', 'QualificationsDetails.qualification_id')
+            ->select('CPDReport.*', 'QualificationsDetails.qualification_name as qualification_name', 'QualificationsDetails.state_or_territory as region', 'QualificationsDetails.CPD_unit as cpd_unit')
+            ->where('CPDReport.cpd_id', $cpd_id)
+            ->first();
+
+        if (!$report) {
+            return redirect()->route('home')->with('error', 'Report not found.');
+        }
+
+        return view('agent.agentEditReport', [
+            'report' => $report,
+            'qualifications' => $qualifications
+        ]);
     }
 
     public function updateReport(Request $request, $cpd_id) {
         // Validate the incoming request data
         $request->validate([
-            'CPD_name' => 'required',
-            'Qualification' => 'required',
-            'Qualification_category' => 'nullable',
-            'cpd_type' => 'nullable',
+            'CPD_name' => ['required', 'string'],
+            'Qualification' => ['required', 'string'],
+            'Qualification_category' => ['nullable', 'string'],
+            'cpd_type' => 'required',
             'CPD_evidence' => 'nullable',
-            'units' => ['nullable', 'min:0'],
-            'CPD_year' => ['required', 'min:4', 'max:4'],
-            'year_completed' => ['required', 'min:4', 'max:4']
+            'units' => ['required', 'min:0', 'integer'],
+            'CPD_year' => ['required', 'digits:4', 'integer'],
+            'year_completed' => ['required', 'digits:4', 'integer', 'gte:CPD_year']
         ]);
 
-        // Prepare the data to update
         $data = [
             'cpd_name' => $request->input('CPD_name'),
             'qualification_id' => $request->input('Qualification'),
-            'qualification_category' => $request->input('Qualification_category'),
             'cpd_type' => $request->input('cpd_type'),
             'units' => $request->input('units'),
             'CPD_year' => $request->input('CPD_year'),
@@ -131,10 +147,21 @@ class CPDReportController extends Controller
         ];
 
 
-        // Update the report in the database
         DB::table('CPDReport')->where('cpd_id', $cpd_id)->update($data);
 
-        // Redirect back to the page showing all CPD records with a success message
-        return redirect()->route('yourRouteToAllCPDRecords')->with('success', 'CPD record updated successfully.');
+        return redirect()->route('agentAllCPD')->with('success', 'CPD record updated successfully.');
+    }
+    public function search(Request $request) {
+        $searchTerm = $request->input('search');
+
+        // Query to filter based on CPD name or qualification
+        $reports = DB::table('CPDReport')
+            ->join('QualificationsDetails', 'CPDReport.qualification_id', '=', 'QualificationsDetails.qualification_id')
+            ->select('CPDReport.*', 'QualificationsDetails.qualification_name as qualification_name', 'QualificationsDetails.state_or_territory as region')
+            ->where('CPDReport.cpd_name', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('QualificationsDetails.qualification_name', 'LIKE', "%{$searchTerm}%")
+            ->get();
+
+        return view('agent.agentAllCPD', ['reports' => $reports]);
     }
 }
