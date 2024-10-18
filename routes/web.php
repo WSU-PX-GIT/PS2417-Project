@@ -29,9 +29,12 @@ Route::get('/agentAddReport', [CPDReportController::class, 'getQualifications'])
 Route::get('/agentAllCPD', [CPDReportController::class, 'viewAllReports'])->name('agentAllCPD');
 Route::post('report_added', [CPDReportController::class, 'addReport'])->name('addReport');
 Route::get('/agentViewReport/{cpd_id}', [CPDReportController::class, 'viewOneReport'])->name('agentViewReport');
-Route::post('/deleteReport/{cpd_id}', [CPDReportController::class, 'deleteReport'])->name('deleteReport');
+Route::get('/deleteReport/{cpd_id}', [CPDReportController::class, 'deleteReport'])->name('deleteReport');
 Route::get('/agentEditReport/{cpd_id}', [CPDReportController::class, 'editReport'])->name('editReport');
 Route::post('/agentEditReport/{cpd_id}', [CPDReportController::class, 'updateReport'])->name('updateReport');
+Route::get('/searchCPD', [CPDReportController::class, 'search'])->name('searchCPDRecords');
 
 
 require __DIR__.'/auth.php';
+
+
