@@ -74,5 +74,21 @@ The Admin tier is the highest access level, but is only for employees of CPD tra
 
 ## File Overview
 
-There are multiple user layout folders, one for each user type: admin, agent and agency.
+There are multiple user layout folders, one for each user type: admin, agent and agency. along with this are controllers for the CPD qualifications and CPD reports.
+
+## Migration Process
+Using LightSail AWS:
+Navigate to the Correct Web Root Directory
+Use this command to navigate to the Bitnami web root:
+cd /opt/bitnami/apache2/htdocs
+
+Clone GitHub Repository
+sudo git clone https://github.com/WSU-PX-GIT/PS2417-Project.git
+
+Install Composer Dependencies
+cd /opt/bitnami/apache2/htdocs/PS2417-Project
+sudo composer install
+
+sudo php artisan key:generate
+sudo php artisan migrate
 
