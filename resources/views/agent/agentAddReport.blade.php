@@ -31,11 +31,6 @@
             </p>
 
             <p>
-                <label for="Qualification_category">Qualification Category: </label>
-                <input type="text" id="Qualification_category" name="Qualification_category">
-            </p>
-
-            <p>
                 <label for="cpd_type">CPD Type: </label>
                 <input type="radio" id="Compulsory" name="cpd_type" value="Compulsory">
                 <label for="Compulsory">Compulsory</label>
