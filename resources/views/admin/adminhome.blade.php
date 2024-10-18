@@ -1,12 +1,12 @@
-<x-appadmin-layout>
+<x-appagency-layout>
     <div class="main-area">
 
         {{--    <x-slot name="header">--}}
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Admin Dashboard') }}
+            {{ __('Agency Dashboard') }}
         </h2>
         <br>
-        {{ __("Welcome, Admin User!") }}
+        {{ __("Welcome, Agency User!") }}
 
     </div>
-</x-appadmin-layout>
+</x-appagency-layout>
