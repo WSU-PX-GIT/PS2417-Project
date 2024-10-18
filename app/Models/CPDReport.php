@@ -18,6 +18,7 @@ class CPDReport extends Model
         'units',
         'is_cpd_evidence_attached',
         'cpd_evidence',
+        'expiry_date',
         'CPD_year',
         'year_completed',
         'last_updated',
