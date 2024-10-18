@@ -14,17 +14,24 @@
     <table id="cpd_list">
         <tr>
 
-            <th>Region</th>
             <th>Qualification</th>
+            <th>Region</th>
+            <th>Qualification Classes</th>
+            <th>CPD Unit</th>
+            <th>Expiry Renewal Date</th>
 
         </tr>
 
             <tr>
-                <td><a href="{{ route('adminViewCPD') }}">
-
-                    </a></td>
-                <td>{{ $reports->region }}</td>
-                <td>{{ $reports->qualification_name }}</td>
+                @if (count($reports) > 0)
+                    <ul>
+                        @foreach ($reports as $report)
+                            <li>{{ $report->qualification_name }}</li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>No results found.</p>
+                @endif
 
             </tr>
 

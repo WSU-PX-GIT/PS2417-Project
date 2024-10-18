@@ -8,7 +8,7 @@
             </div>
         @endif
         <form method="POST" action="{{ route('addCPD') }}" >
-
+            @csrf
             <p>
                 <label for="qualification_name">Qualification Name: </label>
                 <input type="text" id="qualification_name" name="qualification_name">
