@@ -26,19 +26,14 @@
                 <p><strong>Days until Expired:</strong> {{ (int) \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($report->expiry_date)) }} Days</p>
 
             </section>
-            <br>
-
-            <button type="button" onclick="window.location.href='{{ route('agentAllCPD') }}'">Back</button>
-            <br>
-
-            <form method="POST" action="{{ url('deleteReport', $report->cpd_id) }}" onsubmit="return confirm('Are you sure you want to delete this CPD record?');">
-                @csrf
-                <button type="submit" name="delete">Delete</button>
-            </form>
 
             <br>
-            <button type="button" onclick="window.location.href='{{ route('editReport', $report->cpd_id) }}';">Edit</button>
 
+            <p>
+                <button type="button" onclick="window.location.href='{{ route('agentAllCPD') }}'">Back</button>
+                <button type="button" onclick="if(confirm('Are you sure you want to delete this CPD record?')) { window.location.href='{{ route('deleteReport', $report->cpd_id) }}'; }">Delete</button>
+                <button type="button" onclick="window.location.href='{{ route('editReport', $report->cpd_id) }}';">Edit</button>
+            </p>
         </div>
 
     </div>
