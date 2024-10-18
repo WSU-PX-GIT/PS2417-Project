@@ -51,7 +51,6 @@
             <p>
                 <label for="CPD_evidence">Upload CPD completion Evidence:</label>
                 <input type="file" id="CPD_evidence" name="CPD_evidence">
-            <p>Current File: {{ $report->cpd_evidence }}</p> <!-- Display current file name -->
             </p>
 
             <p>
