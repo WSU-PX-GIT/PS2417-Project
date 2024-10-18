@@ -64,3 +64,15 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Overview
+
+This Laravel project is designed to track CPD records and certifications for real-estate agents.
+the main code is divided into three segments, Agent, Agency and Admin. agent is the basic access to the system, an agent can create cpd records, and track when there are due to renew. 
+Agency is the highest publicly accessible tier, a agency have access to multiple different agent accounts and can view their reports and monitor if they are overdue. 
+The Admin tier is the highest access level, but is only for employees of CPD tracking. this tier can create accounts and modify the CPD certifications themselves.
+
+## File Overview
+
+There are multiple user layout folders, one for each user type: admin, agent and agency.
+
