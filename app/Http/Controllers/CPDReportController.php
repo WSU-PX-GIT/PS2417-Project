@@ -124,7 +124,6 @@ class CPDReportController extends Controller
     }
 
     public function updateReport(Request $request, $cpd_id) {
-        // Validate the incoming request data
         $request->validate([
             'CPD_name' => ['required', 'string'],
             'Qualification' => ['required', 'string'],
@@ -154,7 +153,6 @@ class CPDReportController extends Controller
     public function search(Request $request) {
         $searchTerm = $request->input('search');
 
-        // Query to filter based on CPD name or qualification
         $reports = DB::table('CPDReport')
             ->join('QualificationsDetails', 'CPDReport.qualification_id', '=', 'QualificationsDetails.qualification_id')
             ->select('CPDReport.*', 'QualificationsDetails.qualification_name as qualification_name', 'QualificationsDetails.state_or_territory as region')
@@ -164,4 +162,6 @@ class CPDReportController extends Controller
 
         return view('agent.agentAllCPD', ['reports' => $reports]);
     }
+
+
 }
