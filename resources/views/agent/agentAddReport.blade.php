@@ -11,7 +11,7 @@
 <body>
 
     <div class="main-area">
-        <h2>Add CPD</h2>
+        <h2>Add CPD Record</h2>
         <form method="POST" action="{{url('report_added')}}" enctype="multipart/form-data">
             @csrf
 
