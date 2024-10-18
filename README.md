@@ -92,3 +92,7 @@ sudo composer install
 sudo php artisan key:generate
 sudo php artisan migrate
 
+## Support
+
+If you have any problems with this system, please contact Rami Shamon via 20188072@student.westernsydney.edu.au 
+
