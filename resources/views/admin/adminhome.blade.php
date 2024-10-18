@@ -1,18 +1,12 @@
-<x-appadmin-layout>
-    <x-slot name="header">
+<x-appagency-layout>
+    <div class="main-area">
+
+        {{--    <x-slot name="header">--}}
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Admin Dashboard') }}
+            {{ __('Agency Dashboard') }}
         </h2>
-    </x-slot>
+        <br>
+        {{ __("Welcome, Agency User!") }}
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("Welcome, Admin User!") }}
-                </div>
-            </div>
-        </div>
     </div>
-
-</x-appadmin-layout>
+</x-appagency-layout>

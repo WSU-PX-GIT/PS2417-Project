@@ -6,9 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                            {{ __('CPD Tracking') }}
-                        </x-nav-link>
+                        <x-application-logo></x-application-logo>
                     </a>
                 </div>
 

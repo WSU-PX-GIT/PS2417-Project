@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('truncated_name');
             $table->string('CPD_unit');
             $table->date('expiry_renewal_date');
+            $table->integer('retention_period');
             $table->dateTime('last_updated');
             $table->timestamps();
         });
@@ -50,10 +51,12 @@ return new class extends Migration
             $table->integer('units');
             $table->boolean('is_cpd_evidence_attached');
             $table->text('cpd_evidence');
+            $table->date('expiry_date');
             $table->year('CPD_year');
             $table->year('year_completed');
             $table->dateTime('last_updated');
             $table->boolean('record_status');
+            $table->timestamps();
         });
     }
 
