@@ -11,7 +11,7 @@
 <body>
 
     <div class="main-area">
-        <h2>Add CPD</h2>
+        <h2>Add CPD Record</h2>
         <form method="POST" action="{{url('report_added')}}" enctype="multipart/form-data">
             @csrf
 
@@ -28,11 +28,6 @@
                         <option value="{{ $qualification->qualification_id }}">{{ $qualification->truncated_name }}</option>
                     @endforeach
                 </select>
-            </p>
-
-            <p>
-                <label for="Qualification_category">Qualification Category: </label>
-                <input type="text" id="Qualification_category" name="Qualification_category">
             </p>
 
             <p>

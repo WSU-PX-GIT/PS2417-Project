@@ -264,7 +264,7 @@
                     {{ __('View All CPD') }}
                 </x-nav-link>
                 <x-nav-link :href="route('agentAddReport')" :active="request()->routeIs('agentaddReport')">
-                    {{ __('Add Report') }}
+                    {{ __('Add Record') }}
                 </x-nav-link>
                 <a href="ActionRequired_page.html">Action Required</a>
             </div>
