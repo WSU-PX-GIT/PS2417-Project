@@ -15,15 +15,17 @@
 
     <h2>All CPD Records</h2>
 
-
+    <br>
     <button type="button" onclick="window.location.href='{{ route('agentAddReport') }}';">Add CPD Record</button>
     <br><br>
 
-    <form method="GET" action="{{ route('searchCPDRecords') }}">
+    <form method="GET" action="{{ route('searchCPDRecords') }}" class="search_bar">
         <input type="text" name="search" placeholder="Search by CPD Name or Qualification">
         <button type="submit">Search</button>
         <button type="button" onclick="window.location.href='{{ route('agentAllCPD') }}';">Reset</button>
     </form>
+
+    <br>
 
     <table id="cpd_list">
         <tr>
