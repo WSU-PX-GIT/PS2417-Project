@@ -15,7 +15,6 @@ class CPDReportController extends Controller
         $incoming_fields = $request->validate([
             'CPD_name' => ['required', 'string'],
             'Qualification' => ['required', 'string'],
-            'Qualification_category' => ['nullable', 'string'],
             'cpd_type' => 'required',
             'CPD_evidence' => 'nullable',
             'units' => ['required', 'min:0', 'integer'],
@@ -33,8 +32,15 @@ class CPDReportController extends Controller
         $report->CPD_year = $request['CPD_year'];
         $report->year_completed = $request['year_completed'];
 
-        $report->is_cpd_evidence_attached = false;
         $report->cpd_evidence = 'no';
+//        $report->cpd_evidence = $request['cpd_evidence'];
+
+        $report->is_cpd_evidence_attached = false;
+//        if (empty($request['cpd_evidence'])) {
+//            $report->is_cpd_evidence_attached = false;
+//        } else {
+//            $report->is_cpd_evidence_attached = true;
+//        }
         $report->last_updated = now();
         $report->record_status = false;
 
@@ -90,7 +96,7 @@ class CPDReportController extends Controller
         $reports = DB::table('CPDReport')
             ->join('QualificationsDetails', 'CPDReport.qualification_id', '=', 'QualificationsDetails.qualification_id')
             ->select('CPDReport.*', 'QualificationsDetails.qualification_name as qualification_name', 'QualificationsDetails.state_or_territory as region')
-            ->where('CPDReport.user_id', Auth::id()) // Show only where user_id = 2
+            ->where('CPDReport.user_id', Auth::id())
             ->get();
 
 
@@ -156,12 +162,11 @@ class CPDReportController extends Controller
         $reports = DB::table('CPDReport')
             ->join('QualificationsDetails', 'CPDReport.qualification_id', '=', 'QualificationsDetails.qualification_id')
             ->select('CPDReport.*', 'QualificationsDetails.qualification_name as qualification_name', 'QualificationsDetails.state_or_territory as region')
+            ->where('CPDReport.user_id', Auth::id())
             ->where('CPDReport.cpd_name', 'LIKE', "%{$searchTerm}%")
             ->orWhere('QualificationsDetails.qualification_name', 'LIKE', "%{$searchTerm}%")
             ->get();
 
         return view('agent.agentAllCPD', ['reports' => $reports]);
     }
-
-
 }
