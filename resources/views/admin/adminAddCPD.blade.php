@@ -29,11 +29,6 @@
             </p>
 
             <p>
-                <label for="qualification_classes">Qualification Class: </label>
-                <input type="text" id="qualification_classes" name="qualification_classes">
-            </p>
-
-            <p>
                 <label for="CPD_unit">CPD Unit: </label>
                 <input type="text" id="CPD_unit" name="CPD_unit">
             </p>
@@ -41,6 +36,11 @@
             <p>
                 <label for="expiry_renewal_date">Expiry Renewal Date: </label>
                 <input type="date" id="expiry_renewal_date" name="expiry_renewal_date">
+            </p>
+
+            <p>
+                <label for="retention_period">Retention Period: </label>
+                <input type="number" id="retention_period" name="retention_period">
             </p>
 
             <p>

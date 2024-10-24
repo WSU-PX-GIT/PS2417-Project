@@ -1,4 +1,4 @@
-<x-appagency-layout>
+<x-appadmin-layout>
     <div class="main-area">
 
         {{--    <x-slot name="header">--}}
@@ -9,4 +9,4 @@
         {{ __("Welcome, Agency User!") }}
 
     </div>
-</x-appagency-layout>
+</x-appadmin-layout>

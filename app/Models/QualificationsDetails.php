@@ -17,6 +17,7 @@ class QualificationsDetails extends Model
         'truncated_name',
         'CPD_unit',
         'expiry_renewal_date',
+        'retention_period',
         'last_updated'
     ];
 

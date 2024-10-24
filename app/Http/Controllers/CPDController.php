@@ -44,6 +44,7 @@ class CPDController extends Controller
         $CPD->truncated_name = $request->truncated_name;
         $CPD->CPD_unit = $request->CPD_unit;
         $CPD->expiry_renewal_date = $request->expiry_renewal_date;
+        $CPD->retention_period = $request->retention_period;
         $CPD->last_updated = now();
         $CPD->save();
         return back()->with('success', 'CPD Created successfully');
@@ -66,6 +67,7 @@ class CPDController extends Controller
             'truncated_name' => $request->input('truncated_name'),
             'CPD_unit' => $request->input('CPD_unit'),
             'expiry_renewal_date' => $request->input('expiry_renewal_date'),
+            'retention_period' => $request->input('retention_period'),
             'last_updated' => now()
         ];
 
