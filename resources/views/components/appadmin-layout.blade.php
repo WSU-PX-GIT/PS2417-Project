@@ -278,7 +278,7 @@
 
             </div>
         </div>
-        <div id="mainarea" class="main-area">
+        <div id="main-area" class="main-area">
             {{ $slot }}
         </div>
     </main>

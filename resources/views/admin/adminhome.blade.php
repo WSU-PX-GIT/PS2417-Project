@@ -3,10 +3,10 @@
 
         {{--    <x-slot name="header">--}}
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Agency Dashboard') }}
+            {{ __('Admin Dashboard') }}
         </h2>
         <br>
-        {{ __("Welcome, Agency User!") }}
+        {{ __("Welcome, Admin User!") }}
 
     </div>
 </x-appadmin-layout>
