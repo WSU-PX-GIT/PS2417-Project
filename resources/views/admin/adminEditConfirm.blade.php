@@ -28,7 +28,6 @@
                 <input type="text" id="truncated_name" name="truncated_name" value="{{$CPD->truncated_name}}">
             </p>
 
-
             <p>
                 <label for="CPD_unit">CPD Unit: </label>
                 <input type="text" id="CPD_unit" name="CPD_unit" value="{{$CPD->CPD_unit}}">
@@ -40,8 +39,12 @@
             </p>
 
             <p>
-                <button type="button" onclick="window.location.href='{{route('home')}}';">Cancel</button> <!-- Redirects the user -->
+                <label for="retention_period">Expiry Renewal Date: </label>
+                <input type="number" id="retention_period" name="retention_period" value="{{$CPD->retention_period}}">
+            </p>
 
+            <p>
+                <button type="button" onclick="window.location.href='{{route('home')}}';">Cancel</button>
                 <input type="submit" value="Enter">
             </p>
         </form>

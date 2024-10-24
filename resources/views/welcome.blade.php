@@ -53,7 +53,7 @@
                 width: 50%;
                 background-color: #569186;
                 box-shadow: 0px 0px 10px;
-
+                transition: all 0.3s ease;
             }
 
             nav a {
@@ -62,6 +62,7 @@
                 width: 93%;
                 color: white;
                 text-align: center;
+                transition: all 0.3s ease;
             }
 
             nav a:hover {
