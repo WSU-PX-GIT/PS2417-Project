@@ -1,9 +1,10 @@
 <x-appagency-layout>
-    <x-slot name="header">
+    <div class="main-area">
+{{--    <x-slot name="header">--}}
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Admin Creation') }}
+            {{ __('Agency Creation') }}
         </h2>
-    </x-slot>
+{{--    </x-slot>--}}
     <div class="card-body">
         @if(Session::has('success'))
             <div class="alert alert-success" role="alert">
@@ -73,5 +74,5 @@
             </x-primary-button>
         </div>
     </form>
-
+    </div>
 </x-appagency-layout>
