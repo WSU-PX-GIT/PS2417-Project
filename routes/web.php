@@ -17,9 +17,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 route::get('/home', [HomeController::class, 'index']) ->middleware('auth') -> name('home');
-Route::get('/search', [SearchController::class, 'search'])->name('user.search');
+Route::get('/adminsearch', [SearchController::class, 'adminsearch'])->name('admin.search');
+Route::get('/agencysearch', [SearchController::class, 'agencysearch'])->name('agency.search');
+Route::post('editAgencyUserConfirm/,{id}', [SearchController::class, 'editAgencyUserConfirm']) -> name('editAgencyUserConfirm');
+Route::post('editAdminUserConfirm/,{id}', [SearchController::class, 'editAdminUserConfirm']) -> name('editAdminUserConfirm');
 Route::get('/adminassign', function () {return view('admin.adminassign');}) -> name('adminassign');
-Route::get('/adminassign2', function () {return view('admin.adminassign2');}) -> name('adminassign2');
+Route::get('/adminassignconfirm', function () {return view('admin.adminassignconfirm');}) -> name('adminassignconfirm');
 Route::get('/admincreate', function () {return view('admin.admincreate');}) -> name('admincreate');
 Route::get('/adminAddCPD', function () {return view('admin.adminAddCPD');}) -> name('adminAddCPD');
 Route::get('/adminViewCPD', [CPDController::class, 'searchCPD']) -> name('adminViewCPD');

@@ -6,7 +6,14 @@
         </h2>
 {{--    </x-slot>--}}
         <br>
-    <form action="{{ route('user.search') }}" method="GET" class="search_bar">
+        <div class="card-body">
+            @if(Session::has('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+        </div>
+    <form action="{{ route('agency.search') }}" method="GET" class="search_bar">
         <input type="text" name="search" placeholder="Search Users">
         <button type="submit">Search</button>
 

@@ -59,7 +59,7 @@ class RegisteredUserController extends Controller
         $user->password = Hash::make($request->password);
         $user->usertype = $request->usertype;
         $user->save();
-        return back()->with('success', 'Register successfully');
+        return back()->with('success', 'Registered successfully');
     }
 
 
@@ -70,7 +70,9 @@ class RegisteredUserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->usertype = $request->usertype;
+        $user->AgencyName = Auth::user()->AgencyName;
+        $user->AgencyID = Auth::user()->AgencyID;
         $user->save();
-        return back()->with('success', 'Register successfully');
+        return back()->with('success', 'Registered successfully');
     }
 }
