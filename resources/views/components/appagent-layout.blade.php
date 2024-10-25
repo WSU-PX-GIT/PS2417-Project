@@ -266,7 +266,9 @@
                 <x-nav-link :href="route('agentAddReport')" :active="request()->routeIs('agentaddReport')">
                     {{ __('Add Record') }}
                 </x-nav-link>
-                <a href="ActionRequired_page.html">Action Required</a>
+                <x-nav-link :href="route('agentActionRequired')" :active="request()->routeIs('agentActionRequired')">
+                    {{ __('Action Required') }}
+                </x-nav-link>
             </div>
         </div>
         <div id="main-area" class="main-area">

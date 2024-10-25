@@ -23,7 +23,9 @@
                     <td>{{ $report->user_name }}</td>
                     <td>{{ $report->cpd_name }}</td>
                     <td>{{ $report->expiry_date }}</td>
-                    <td><button>Send Reminder</button></td>
+                    <td>
+                        <a href="{{ route('agency.reminder', ['agent' => $report->user_id]) }}" class="btn btn-primary">Send Reminder</a>
+                    </td>
                 </tr>
             @endforeach
 

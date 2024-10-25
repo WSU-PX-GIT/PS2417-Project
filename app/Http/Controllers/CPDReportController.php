@@ -170,6 +170,20 @@ class CPDReportController extends Controller
         return view('agent.agentAllCPD', ['reports' => $reports]);
     }
 
+    public function closeToExpiryReports()
+    {
+
+        $reports = DB::table('CPDReport')
+            ->join('users', 'users.id', '=', 'CPDReport.user_id')
+            ->where('users.usertype', 'agent')
+            ->select('CPDReport.*', 'users.id as user_id', 'users.name as user_name')
+            ->orderBy('CPDReport.expiry_date', 'asc')
+            ->get();
+
+
+        return view('agent.agentActionRequired', compact('reports'));
+    }
+
     public function findAgentReports()
     {
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CPDReportController;
+use App\Http\Controllers\ReminderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -40,7 +41,7 @@ Route::get('/adminmanagement', function () {return view('admin.cpdmanagement');}
 Route::post('registeradmin', [RegisteredUserController::class, 'adminstore'])->name('registeradmin');
 Route::post('registeragency', [RegisteredUserController::class, 'agencystore'])->name('registeragency');
 
-
+Route::get('/send-reminder/{agent}', [ReminderController::class, 'sendReminder'])->name('agency.reminder');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -58,8 +59,8 @@ Route::get('/agentEditReport/{cpd_id}', [CPDReportController::class, 'editReport
 Route::post('/agentEditReport/{cpd_id}', [CPDReportController::class, 'updateReport'])->name('updateReport');
 Route::get('/searchCPD', [CPDReportController::class, 'search'])->name('searchCPDRecords');
 
-//Route::get('/agencySendReminder', function () {return view('agency.agencySendReminder');}) -> name('agencySendReminder');
 Route::get('/agencySendReminder', [CPDReportController::class, 'findAgentReports'])->name('agencySendReminder');
+Route::get('/agentActionRequired', [CPDReportController::class, 'closeToExpiryReports'])->name('agentActionRequired');
 
 require __DIR__.'/auth.php';
 
