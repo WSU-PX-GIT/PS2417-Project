@@ -40,7 +40,7 @@
 
             <p>
                 <label for="retention_period">Retention Period: </label>
-                <input type="number" id="retention_period" name="retention_period">
+                <input type="number" id="retention_period" name="retention_period"> Years
             </p>
 
             <p>
