@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
@@ -37,12 +38,22 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+        if ($request->usertype == 'agency'){
+            $agencyname = $request->agencyname;
+            $agencyIDMax = DB::table('users')->orderBy('AgencyID', 'desc')->first();
+            $agencyID = $agencyIDMax->AgencyID +1;
+        }
+        else{
+            $agencyname = null;
+            $agencyID = null;
+        }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'usertype' => $request->usertype
+            'usertype' => $request->usertype,
+            'AgencyName' => $agencyname,
+            'AgencyID' => $agencyID
         ]);
 
         event(new Registered($user));
