@@ -34,13 +34,13 @@ Route::post('/addCPD', [CPDController::class, 'addCPD']) -> name('addCPD');
 Route::get('editCPD/,{id}', [CPDController::class, 'editCPD']) -> name('editCPD');
 Route::post('editCPDConfirm/,{id}', [CPDController::class, 'editCPDConfirm']) -> name('editCPDConfirm');
 
-
-
 Route::get('/agencyassign', function () {return view('agency.agencyassign');}) -> name('agencyassign');
 Route::get('/agencycreate', function () {return view('agency.agencycreate');}) -> name('agencycreate');
 Route::get('/adminmanagement', function () {return view('admin.cpdmanagement');}) -> name('adminmanagement');
 Route::post('registeradmin', [RegisteredUserController::class, 'adminstore'])->name('registeradmin');
 Route::post('registeragency', [RegisteredUserController::class, 'agencystore'])->name('registeragency');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -58,6 +58,8 @@ Route::get('/agentEditReport/{cpd_id}', [CPDReportController::class, 'editReport
 Route::post('/agentEditReport/{cpd_id}', [CPDReportController::class, 'updateReport'])->name('updateReport');
 Route::get('/searchCPD', [CPDReportController::class, 'search'])->name('searchCPDRecords');
 
+//Route::get('/agencySendReminder', function () {return view('agency.agencySendReminder');}) -> name('agencySendReminder');
+Route::get('/agencySendReminder', [CPDReportController::class, 'findAgentReports'])->name('agencySendReminder');
 
 require __DIR__.'/auth.php';
 

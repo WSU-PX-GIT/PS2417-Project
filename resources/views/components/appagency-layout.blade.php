@@ -262,11 +262,9 @@
                 <x-nav-link :href="route('agencyassign')" :active="request()->routeIs('agencyassign')">
                     {{ __('Create/Assign Agency') }}
                 </x-nav-link>
-                <a href="ActionRequired_page.html">Action Required</a>
-            </div>
-            <div>
-                <a href="non_compliant_page.html">Non-Compliant</a>
-                <a href="reporting_page.html">Reporting</a>
+                <x-nav-link :href="route('agencySendReminder')" :active="request()->routeIs('agencySendReminder')">
+                    {{ __('Agent Reminder') }}
+                </x-nav-link>
             </div>
         </div>
         <div id="main-area" class="main-area">
