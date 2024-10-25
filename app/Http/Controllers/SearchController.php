@@ -36,7 +36,10 @@ class SearchController extends Controller {
     }
     public function editAdminUserConfirm(Request $request,$id): RedirectResponse
     {
+
         $data = [
+            'AgencyName' => null,
+            'AgencyID' => null,
             'usertype' => $request->input('usertype'),
             'updated_at' => now()
         ];

@@ -1,6 +1,14 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+
+    <script>
+        function hide() {
+            var x = document.getElementById("agencyname")
+            x.style.display = "none";
+        }
+    </script>
+    <form method="POST" action="{{ route('register') }}" onload="hide()">
         @csrf
+
 
         <!-- Name -->
         <div>
@@ -39,16 +47,34 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
+        <script>
+
+            function getComboA(selectObject) {
+                var value = selectObject.value;
+                if(value == "agency"){
+                    var x = document.getElementById("agencyname")
+                    x.style.display = "block";
+                }
+            }
+        </script>
+
         <!-- User Select -->
         <div class="mt-4">
             <x-input-label for="usertype" :value="__('User Select')" />
-            <select class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" id="usertype" name="usertype">
+            <select class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" id="usertype" name="usertype" onchange="getComboA(this)">
                 <option value="">-- Select User Type --</option>
                 <option value="agency">Agency User</option>
                 <option value="agent">Agent User</option>
             </select>
             {{-- <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" /> --}}
             <x-input-error :messages="$errors->get('usertype')" class="mt-2" />
+        </div>
+
+
+        <div class="agencyname" >
+            <x-input-label for="agencyname" :value="__('Agency Name')" />
+            <x-text-input id="agencyname" class="block mt-1 w-full" type="text" name="agencyname" required autocomplete="Agency Name" />
+            <x-input-error :messages="$errors->get('agencyname')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
