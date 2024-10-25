@@ -51,25 +51,23 @@
                 align-items: center;
                 justify-content: center;
                 width: 50%;
-                background-color: #569186;
-                box-shadow: 0px 0px 10px;
                 transition: all 0.3s ease;
+                gap: 2px;
             }
 
             nav a {
+                background-color: #569186;
                 padding: 10px 25px;
                 text-decoration: none;
                 width: 93%;
-                color: white;
+                color: #F5F5F5;
                 text-align: center;
                 transition: all 0.3s ease;
             }
 
             nav a:hover {
-                color: #f1f1f1;
                 text-decoration: underline;
                 background-color: #478177;
-                box-shadow: 0px 0px 10px;
             }
         </style>
     </head>
@@ -96,5 +94,5 @@
             </nav>
         @endif
     </div>
-
+    </body>
 </html>
