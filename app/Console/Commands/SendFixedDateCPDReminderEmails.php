@@ -10,12 +10,15 @@ use App\Mail\CPDReminderEmail;
 
 class SendFixedDateCPDReminderEmails extends Command
 {
+    // Define the command signature (how it's called via Artisan)
     protected $signature = 'cpd:send-fixed-date-reminders';
-    protected $description = 'Send reminder emails for fixed-date CPD renewals on June 30th and October 31st, 7 days before those dates.';
 
-    public function __construct()
+    // Describe what this command does
+    protected $description = 'Send reminder emails on 23rd June and 24th October for CPD compliance.';
+
+    public function construct()
     {
-        parent::__construct();
+        parent::construct();
     }
 
     public function handle()
@@ -25,27 +28,23 @@ class SendFixedDateCPDReminderEmails extends Command
 
         // Define the specific reminder dates (23rd June and 24th October)
         $juneReminderDate = Carbon::createFromDate($today->year, 6, 23);
-        $todaytest = Carbon::createFromDate($today->year, 10, 18);
         $octoberReminderDate = Carbon::createFromDate($today->year, 10, 24);
 
         // Check if today's date matches one of the reminder dates
-        if ($today->isSameDay($juneReminderDate) || $today->isSameDay($octoberReminderDate) || $today->isSameDay($todaytest)) {
-            // Define the relevant renewal dates
-            $renewalDate = $today->isSameDay($juneReminderDate) ? Carbon::createFromDate($today->year, 6, 30) : Carbon::createFromDate($today->year, 10, 31);
+        if ($today->isSameDay($juneReminderDate) || $today->isSameDay($octoberReminderDate)) {
 
-            // Query agents whose CPD renewal date is fixed on 30th June or 31st October
-            $agents = DB::table('CPDReport')
-                ->join('users', 'CPDReport.user_id', '=', 'users.id') // Assuming 'users' table holds user info
-                ->join('QualificationsDetails', 'CPDReport.qualification_id', '=', 'QualificationsDetails.qualification_id')
-                ->whereIn('QualificationsDetails.expiry_renewal_date', [$renewalDate])
+            // Query all agents to send reminder emails
+            $agents = DB::table('users')
+                ->where('role', 'agent') // Assuming 'users' table holds the role info
                 ->get();
 
-            // Send the reminder emails to all agents with the relevant expiry date
+            // Send the reminder emails to all agents
             foreach ($agents as $agent) {
-                Mail::to($agent->email)->send(new CPDReminderEmail($agent, $renewalDate));
+                Mail::to($agent->email)->send(new CPDReminderEmail($agent));
+                $this->info('Reminder sent to: ' . $agent->email);
             }
 
-            $this->info('Reminder emails sent successfully for fixed CPD dates.');
+            $this->info('Reminder emails sent successfully for the fixed CPD dates.');
         } else {
             $this->info('No reminders to send today.');
         }
