@@ -29,23 +29,23 @@
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Azizan Nur Rohman" required>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Name" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" id="email" placeholder="azizan@emailexample.com" required>
+                            <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" name="password" class="form-control" id="password" required>
                         </div>
                         <div class="mb-3">
-                            <x-input-label for="usertype" :value="__('User Select')" />
+                            <x-input-label for="usertype" :value="__('Role Select')" />
                             <select class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" id="usertype" name="usertype">
-                                <option value="">-- Select User Type --</option>
-                                <option value="admin">Admin User</option>
-                                <option value="agency">Agency User</option>
-                                <option value="agent">Agent User</option>
+                                <option value="">-- Select Role for User --</option>
+                                <option value="admin">Agency</option>
+                                <option value="agency">Agency</option>
+                                <option value="agent">Agent</option>
                             </select>
                             {{-- <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" /> --}}
                             <x-input-error :messages="$errors->get('usertype')" class="mt-2" />

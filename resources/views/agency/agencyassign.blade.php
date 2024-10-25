@@ -7,14 +7,12 @@
     <form action="{{ route('user.search') }}" method="GET">
         <input type="text" name="search" placeholder="Search Users">
         <button type="submit">Search</button>
-        @if (count($results) > 0)
-            <ul>
-                @foreach ($results as $result)
-                    <li>{{ $result->name }}</li>
-                @endforeach
-            </ul>
-        @else
-            <p>No results found.</p>
-        @endif
+
     </form>
+    <h3 class="font-semibold text-xl text-gray-800 leading-tight ml-5 content-center">
+        {{ __('Or create Agency user') }}
+    </h3>
+    <button><x-nav-link :href="route('agencycreate')" :active="request()->routeIs('agencycreate')">
+            {{ __('Create Agency') }}
+        </x-nav-link></button>
 </x-appagency-layout>

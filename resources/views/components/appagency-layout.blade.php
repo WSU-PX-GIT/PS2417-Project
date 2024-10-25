@@ -35,7 +35,7 @@
                 <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                     {{ __('Agency Dashboard') }}
                 </x-nav-link>
-                <x-nav-link :href="route('adminassign')" :active="request()->routeIs('adminassign')">
+                <x-nav-link :href="route('agencyassign')" :active="request()->routeIs('agencyassign')">
                     {{ __('Create/Assign Agency') }}
                 </x-nav-link>
                 <a href="ActionRequired_page.html">Action Required</a>
