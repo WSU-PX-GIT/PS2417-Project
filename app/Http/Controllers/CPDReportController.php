@@ -172,14 +172,14 @@ class CPDReportController extends Controller
 
     public function closeToExpiryReports()
     {
+        $today = now();
 
         $reports = DB::table('CPDReport')
-            ->join('users', 'users.id', '=', 'CPDReport.user_id')
-            ->where('users.usertype', 'agent')
-            ->select('CPDReport.*', 'users.id as user_id', 'users.name as user_name')
+            ->join('QualificationsDetails', 'CPDReport.qualification_id', '=', 'QualificationsDetails.qualification_id')
+            ->select('CPDReport.*', 'QualificationsDetails.qualification_name as qualification_name', 'QualificationsDetails.state_or_territory as region')
+            ->where('CPDReport.user_id', Auth::id())
             ->orderBy('CPDReport.expiry_date', 'asc')
             ->get();
-
 
         return view('agent.agentActionRequired', compact('reports'));
     }
