@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/agentAddReport', [CPDReportController::class, 'getQualifications']) -> name('agentAddReport');
+Route::get('/downloadReport/{cpd_filename}', [CPDReportController::class, 'downloadReport']) -> name('downloadReport');
 Route::get('/agentAllCPD', [CPDReportController::class, 'viewAllReports'])->name('agentAllCPD');
 Route::post('report_added', [CPDReportController::class, 'addReport'])->name('addReport');
 Route::get('/agentViewReport/{cpd_id}', [CPDReportController::class, 'viewOneReport'])->name('agentViewReport');

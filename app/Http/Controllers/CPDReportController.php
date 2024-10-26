@@ -7,16 +7,21 @@ use Illuminate\Support\Facades\DB;
 use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 use App\Models\CPDreport;
 use Illuminate\support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class CPDReportController extends Controller
 {
+    public function downloadReport($cpd_filename){
+        Storage::download($cpd_filename);
+    }
     public function addReport(Request $request)
     {
         $incoming_fields = $request->validate([
             'CPD_name' => ['required', 'string'],
             'Qualification' => ['required', 'string'],
             'cpd_type' => 'required',
-            'CPD_evidence' => 'nullable',
+            'CPD_evidence' => ['mimes:doc,docx,pdf|max:2048'],
             'units' => ['required', 'min:0', 'integer'],
             'CPD_year' => ['required', 'digits:4', 'integer'],
             'year_completed' => ['required', 'digits:4', 'integer', 'gte:CPD_year']
@@ -32,15 +37,16 @@ class CPDReportController extends Controller
         $report->CPD_year = $request['CPD_year'];
         $report->year_completed = $request['year_completed'];
 
-        $report->cpd_evidence = 'no';
-//        $report->cpd_evidence = $request['cpd_evidence'];
+        if (empty($request['CPD_evidence'])) {
+           $report->is_cpd_evidence_attached = false;
+           $report->cpd_evidence = 'No Evidence Attached';
+       } else {
+            $fileName = $request['CPD_evidence']->getClientOriginalName();
+            $path = Storage::putFileAs('CPD_Evidence', $request['CPD_evidence'], $fileName);
+            $report->cpd_evidence = $path;
+            $report->is_cpd_evidence_attached = true;
+        }
 
-        $report->is_cpd_evidence_attached = false;
-//        if (empty($request['cpd_evidence'])) {
-//            $report->is_cpd_evidence_attached = false;
-//        } else {
-//            $report->is_cpd_evidence_attached = true;
-//        }
         $report->last_updated = now();
         $report->record_status = false;
 
@@ -60,10 +66,7 @@ class CPDReportController extends Controller
 
     }
 
-    public function uploadFile()
-    {
 
-    }
 
     public function getQualifications()
     {
@@ -104,6 +107,9 @@ class CPDReportController extends Controller
     }
 
     public function deleteReport($cpd_id) {
+        $record = DB::table('CPDReport')->where('cpd_id', $cpd_id)->first();
+        $recordFile = $record->cpd_evidence;
+        Storage::delete($recordFile);
         DB::table('CPDReport')->where('cpd_id', $cpd_id)->delete();
 
         return redirect()->route('agentAllCPD')->with('success', 'CPD record deleted successfully.');
