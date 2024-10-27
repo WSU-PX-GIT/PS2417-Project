@@ -44,7 +44,7 @@
             </p>
 
             <p>
-                <button type="button" onclick="window.location.href='{{route('home')}}';">Cancel</button> <!-- Redirects the user -->
+                <button type="button" onclick="window.location.href='{{route('adminViewCPD')}}';">Cancel</button>
 
                 <input type="submit" value="Enter">
             </p>
