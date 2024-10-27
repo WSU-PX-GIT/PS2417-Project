@@ -17,15 +17,26 @@
             <section id="document-details">
                 <p><strong>CPD Name:</strong> {{ $report->cpd_name }}</p>
                 <p><strong>Qualification:</strong> {{ $report->qualification_name }}</p>
-                <p><strong>Region:</strong> {{ $report->region }}</p> <!-- assuming a relationship exists -->
+                <p><strong>Region:</strong> {{ $report->region }}</p>
                 <p><strong>CPD Type:</strong> {{ $report->cpd_type }}</p>
                 <p><strong>Units:</strong> {{ $report->units }} {{ $report->cpd_unit }}</p>
                 <p><strong>CPD Year:</strong> {{ $report->CPD_year }}</p>
                 <p><strong>Year Completed:</strong> {{ $report->year_completed }}</p>
                 <p><strong>Expiry Date:</strong> {{ $report->expiry_date }}</p>
                 <p><strong>Days until Expired:</strong> {{ (int) \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($report->expiry_date)) }} Days</p>
-                <p><strong>Evidence Uploaded:</strong> {{ $report->cpd_evidence }} <button type="button" onclick="window.location.href='{{ route('downloadReport', $report->cpd_evidence) }}'"> Download File </button> </p>
-
+                <p><strong>Evidence Uploaded:</strong>
+                    @if($report->cpd_evidence == "No Evidence Attached")
+                        {{ $report->cpd_evidence }}
+                    @else
+                        <button type="button" onclick="window.location.href='{{ route('downloadReport', $report->cpd_evidence) }}'"> Download File</button>
+                   @endif
+                </p>
+                <p><strong>Record Status:</strong>
+                    @if($report->record_status)
+                        {{"Completed"}}
+                    @else
+                        {{"Incomplete"}}
+                    @endif</p>
             </section>
 
             <br>
