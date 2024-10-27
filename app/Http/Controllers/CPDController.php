@@ -37,6 +37,15 @@ class CPDController extends Controller
     }
     public function addCPD(Request $request): RedirectResponse
     {
+        $incoming_fields = $request->validate([
+            'qualification_name' => ['required', 'string'],
+            'state_or_territory' => ['required', 'string'],
+            'state_abbreviation' => ['required', 'string'],
+            'truncated_name' => ['required', 'string'],
+            'expiry_renewal_date' => ['required'],
+            'retention_period' => ['required', 'min:0', 'integer'],
+        ]);
+
         $CPD = new CPD();
         $CPD->qualification_name = $request->qualification_name;
         $CPD->state_or_territory = $request->state_or_territory;
@@ -60,6 +69,15 @@ class CPDController extends Controller
             }
     public function editCPDConfirm(Request $request,$id): RedirectResponse
     {
+        $incoming_fields = $request->validate([
+            'qualification_name' => ['required', 'string'],
+            'state_or_territory' => ['required', 'string'],
+            'state_abbreviation' => ['required', 'string'],
+            'truncated_name' => ['required', 'string'],
+            'expiry_renewal_date' => ['required'],
+            'retention_period' => ['required', 'min:0', 'integer'],
+        ]);
+
         $data = [
             'qualification_name' => $request->input('qualification_name'),
             'state_or_territory' => $request->input('state_or_territory'),
