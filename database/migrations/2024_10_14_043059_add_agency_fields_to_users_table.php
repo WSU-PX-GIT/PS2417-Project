@@ -12,8 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('AgencyName')->nullable();
-            $table->integer('AgencyID')->nullable();
+            // Add AgencyName if it doesn't exist
+            if (!Schema::hasColumn('users', 'AgencyName')) {
+                $table->string('AgencyName')->nullable();
+            }
+            // Add AgencyID if it doesn't exist
+            if (!Schema::hasColumn('users', 'AgencyID')) {
+                $table->integer('AgencyID')->nullable();
+            }
         });
     }
 
@@ -23,7 +29,13 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            // Remove columns on rollback if they exist
+            if (Schema::hasColumn('users', 'AgencyName')) {
+                $table->dropColumn('AgencyName');
+            }
+            if (Schema::hasColumn('users', 'AgencyID')) {
+                $table->dropColumn('AgencyID');
+            }
         });
     }
 };
