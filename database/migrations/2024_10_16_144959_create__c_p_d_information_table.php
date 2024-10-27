@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,19 +22,32 @@ return new class extends Migration
             $table->dateTime('last_updated');
             $table->timestamps();
         });
+
         Schema::create('QualificationsCategory', function (Blueprint $table) {
             $table->id('category_id')->autoIncrement();
-            $table->integer('qualification_id');
-            $table->foreign('qualification_id')->references('qualification_id')->on('QualificationsDetails');
+            $table->unsignedBigInteger('qualification_id'); // Change to unsignedBigInteger
+            $table->foreign('qualification_id')
+                  ->references('qualification_id')
+                  ->on('QualificationsDetails')
+                  ->onDelete('cascade'); // Optional: Adds cascading delete for linked records
             $table->string('category_name')->nullable(false);
         });
+
         Schema::create('CPDReport', function (Blueprint $table) {
             $table->id('cpd_id')->autoIncrement();
-            $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade'); // Optional cascading delete
+
             $table->string('cpd_name')->nullable(false);
-            $table->integer('qualification_id');
-            $table->foreign('qualification_id')->references('qualification_id')->on('QualificationsDetails');
+            $table->unsignedBigInteger('qualification_id'); // Change to unsignedBigInteger
+            $table->foreign('qualification_id')
+                  ->references('qualification_id')
+                  ->on('QualificationsDetails')
+                  ->onDelete('cascade'); // Optional cascading delete
+
             $table->string('cpd_type');
             $table->integer('units');
             $table->boolean('is_cpd_evidence_attached');
