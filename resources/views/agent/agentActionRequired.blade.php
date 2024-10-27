@@ -19,7 +19,7 @@
 
             @foreach ($reports as $report)
                 @php
-                    $daysLeft = floor(\Carbon\Carbon::now()->diffInDays($report->expiry_date, false)); // Using floor() for whole number
+                    $daysLeft = floor(\Carbon\Carbon::now()->diffInDays($report->expiry_date, false));
                 @endphp
 
                 @if($daysLeft > 0 && $daysLeft <= 30)
