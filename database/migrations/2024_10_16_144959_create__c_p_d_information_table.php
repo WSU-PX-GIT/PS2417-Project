@@ -11,17 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('CPDInformation', function (Blueprint $table) {
-            $table->id('cpd_id')->autoIncrement();
-            $table->integer('qualification_id');
-            $table->string('has_cpd_requirement');
-            $table->string('cpd_evidence_retention_period');
-            $table->text('cpd_exemptions');
-            $table->string('cpd_units');
-            $table->year('current_cpd_year');
-            $table->foreign('qualification_id')->references('qualification_id')->on('QualificationDetails');
-            $table->timestamps();
-        });
         Schema::create('QualificationsDetails', function (Blueprint $table) {
             $table->id('qualification_id')->autoIncrement();
             $table->string('qualification_name')->nullable(false);
@@ -58,13 +47,5 @@ return new class extends Migration
             $table->boolean('record_status');
             $table->timestamps();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('CPDInformation');
     }
 };
