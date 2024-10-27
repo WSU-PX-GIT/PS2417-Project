@@ -20,10 +20,9 @@
 
     <br>
     <h3>
-        {{ __('Or create Administrator user') }}
+        {{ __('Or create Administrator user:') }}
     </h3>
-    <button><x-nav-link :href="route('admincreate')" :active="request()->routeIs('admincreate')">
-        {{ __('Create Admin') }}
-    </x-nav-link></button>
+    <button type="button" onclick="window.location.href='{{ route('admincreate') }}'">Create Admin</button>
+
 </div>
 </x-appadmin-layout>

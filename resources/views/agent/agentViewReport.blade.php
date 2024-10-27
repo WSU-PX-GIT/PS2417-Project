@@ -24,7 +24,7 @@
                 <p><strong>Year Completed:</strong> {{ $report->year_completed }}</p>
                 <p><strong>Expiry Date:</strong> {{ $report->expiry_date }}</p>
                 <p><strong>Days until Expired:</strong> {{ (int) \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($report->expiry_date)) }} Days</p>
-                <p><strong>Evidence Uploaded:</strong> <button type="button" onclick="window.location.href='{{ route('downloadReport', $report->cpd_evidence) }}'"> {{ $report->cpd_evidence }}</button> </p>
+                <p><strong>Evidence Uploaded:</strong> {{ $report->cpd_evidence }} <button type="button" onclick="window.location.href='{{ route('downloadReport', $report->cpd_evidence) }}'"> Download File </button> </p>
 
             </section>
 

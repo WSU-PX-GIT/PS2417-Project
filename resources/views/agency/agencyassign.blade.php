@@ -20,10 +20,8 @@
     </form>
         <br>
     <h3>
-        {{ __('Or create Agency user') }}
+        {{ __('Or create Agency user:') }}
     </h3>
-    <button><x-nav-link :href="route('agencycreate')" :active="request()->routeIs('agencycreate')">
-            {{ __('Create Agency') }}
-        </x-nav-link></button>
+        <button type="button" onclick="window.location.href='{{ route('agencycreate') }}'">Create Agency User</button>
     </div>
 </x-appagency-layout>

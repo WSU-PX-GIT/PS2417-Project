@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class CPDReportController extends Controller
 {
     public function downloadReport($cpd_filename){
-        Storage::download($cpd_filename);
+        return Storage::download($cpd_filename);
     }
     public function addReport(Request $request)
     {
