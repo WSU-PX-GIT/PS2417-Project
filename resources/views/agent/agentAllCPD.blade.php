@@ -33,6 +33,7 @@
             <th>Region</th>
             <th>Qualification</th>
             <th>Year Completed</th>
+            <th>Record Status</th>
             <th>Last Updated</th>
 
         </tr>
@@ -45,6 +46,13 @@
             <td>{{ $report->region }}</td>
             <td>{{ $report->qualification_name }}</td>
             <td>{{ $report->year_completed }}</td>
+            <td>
+                @if($report->record_status)
+                    {{"Completed"}}
+                @else
+                    {{"Incomplete"}}
+                @endif
+            </td>
             <td>{{ $report->last_updated }}</td>
 
         </tr>
