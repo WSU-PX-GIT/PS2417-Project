@@ -21,7 +21,7 @@ class CPDReportController extends Controller
             'CPD_name' => ['required', 'string'],
             'Qualification' => ['required', 'string'],
             'cpd_type' => 'required',
-            'CPD_evidence' => ['mimes:doc,docx,pdf|max:2048'],
+            'CPD_evidence' => ['mimes:doc,docx,pdf,max:2048'],
             'units' => ['required', 'min:0', 'integer'],
             'CPD_year' => ['required', 'digits:4', 'integer'],
             'year_completed' => ['required', 'digits:4', 'integer', 'gte:CPD_year']
@@ -40,15 +40,16 @@ class CPDReportController extends Controller
         if (empty($request['CPD_evidence'])) {
            $report->is_cpd_evidence_attached = false;
            $report->cpd_evidence = 'No Evidence Attached';
+            $report->record_status = false;
        } else {
             $fileName = $request['CPD_evidence']->getClientOriginalName();
             $path = Storage::putFileAs('CPD_Evidence', $request['CPD_evidence'], $fileName);
             $report->cpd_evidence = $path;
             $report->is_cpd_evidence_attached = true;
+            $report->record_status = true;
         }
 
         $report->last_updated = now();
-        $report->record_status = false;
 
         $qualification = DB::table('QualificationsDetails')
             ->select('QualificationsDetails.retention_period')
@@ -141,11 +142,23 @@ class CPDReportController extends Controller
             'Qualification' => ['required', 'string'],
             'Qualification_category' => ['nullable', 'string'],
             'cpd_type' => 'required',
-            'CPD_evidence' => 'nullable',
+            'CPD_evidence' => ['mimes:doc,docx,pdf,max:2048'],
             'units' => ['required', 'min:0', 'integer'],
             'CPD_year' => ['required', 'digits:4', 'integer'],
             'year_completed' => ['required', 'digits:4', 'integer', 'gte:CPD_year']
         ]);
+
+        if (empty($request['CPD_evidence'])) {
+            $is_cpd_evidence_attached = false;
+            $cpd_evidence = 'No Evidence Attached';
+            $record_status = false;
+        } else {
+            $fileName = $request['CPD_evidence']->getClientOriginalName();
+            $path = Storage::putFileAs('CPD_Evidence', $request['CPD_evidence'], $fileName);
+            $cpd_evidence = $path;
+            $is_cpd_evidence_attached = true;
+            $record_status = true;
+        }
 
         $data = [
             'cpd_name' => $request->input('CPD_name'),
@@ -154,9 +167,11 @@ class CPDReportController extends Controller
             'units' => $request->input('units'),
             'CPD_year' => $request->input('CPD_year'),
             'year_completed' => $request->input('year_completed'),
+            'cpd_evidence' => $cpd_evidence,
+            'is_cpd_evidence_attached' => $is_cpd_evidence_attached,
+            'record_status' => $record_status,
             'last_updated' => now()
         ];
-
 
         DB::table('CPDReport')->where('cpd_id', $cpd_id)->update($data);
 
