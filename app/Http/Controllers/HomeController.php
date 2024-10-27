@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use app\Models\User;
-use Illuminate\support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     public function index()
