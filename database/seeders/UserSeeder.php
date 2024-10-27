@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -15,8 +16,6 @@ class UserSeeder extends Seeder
         $this->createAgencyUser();
         $this->createAgentUser();
         $this->createAdminUser();
-
-
     }
 
     public function createAgencyUser()
@@ -31,6 +30,7 @@ class UserSeeder extends Seeder
             'AgencyName' => 'Barry Real Estate'
         ]);
     }
+
     public function createAgentUser()
     {
         User::create([
@@ -39,10 +39,11 @@ class UserSeeder extends Seeder
             'email'    => 'agent@agent.com',
             'password' => bcrypt('password'),
             'usertype' => 'agent',
-            'AgencyID' => '',
-            'AgencyName' => ''
+            'AgencyID' => null,   // Set to NULL
+            'AgencyName' => null  // Set to NULL
         ]);
     }
+
     public function createAdminUser()
     {
         User::create([
@@ -51,8 +52,8 @@ class UserSeeder extends Seeder
             'email'    => 'admin@admin.com',
             'password' => bcrypt('password'),
             'usertype' => 'admin',
-            'AgencyID' => '',
-            'AgencyName' => ''
+            'AgencyID' => null,   // Set to NULL
+            'AgencyName' => null  // Set to NULL
         ]);
     }
 }
