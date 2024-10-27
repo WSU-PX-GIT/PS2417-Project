@@ -56,8 +56,7 @@ class CPDReportController extends Controller
             ->where('qualification_id', $request['Qualification'])
             ->first();
 
-        $date = now()->addYears($qualification->retention_period)->format('d-m-Y');;
-
+        $date = now()->addYears($qualification->retention_period)->format('Y-m-d'); 
         $report->expiry_date = $date;
 
         $report->save();
