@@ -62,7 +62,7 @@
         <p>Best regards,<br>
             The CPDTracking Team</p>
 
-        <p><a href="http://www.cpdtracking.com/login" class="button">Log In to Your Account</a></p>
+        <p><a href="cpdtracking.com/login" class="button">Log In to Your Account</a></p>
     </div>
 
     <div class="footer">
